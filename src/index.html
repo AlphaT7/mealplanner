@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#CB4427">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+    <script type="module" src="./index.js"></script>
+    <title>Meal Planner</title>
+</head>
+
+<body>
+    <div id="mainList" class="listItems"></div>
+    <div id="filterOptionsPanel">
+        <div class="filterOptionsButtons">
+            <div>Select All: </div>
+            <div id="showAllMeals" class="material-icons">done_all</div>
+            <div id="resetFilters" class="material-icons">remove_done</div>
+            <div id="customFilter" class="material-icons">checklist_rtl</div>
+            <div class="space"></div>
+            <div id="close_filterOptionsPanel" class="material-icons">close</div>
+        </div>
+        <div id="filterOptionsList">
+            <div id="meatTypeOptions"></div>
+            <div id="mealTypeOptions"></div>
+        </div>
+    </div>
+    <div id="settingsPanel">
+        <div id="settingsPanelTitle">
+            <div id="activeOptions">About</div>
+            <div id="close_settingsPanel" class="material-icons">close</div>
+        </div>
+        <nav id="navContainer">
+            <div data-tab="menu" class="tab">Manage
+                <div id="navDrop">
+                    <div id="dropContainer">
+                        <div data-tab="0" class="menuBtn">Meals</div>
+                        <div data-tab="1" class="menuBtn">Meal Type</div>
+                        <div data-tab="2" class="menuBtn">Meat Types</div>
+                    </div>
+                </div>
+            </div>
+            <div data-tab="3" class="tab">Options</div>
+            <div data-tab="4" class="tab activeTab">About</div>
+        </nav>
+        <section id="tabGroup">
+            <div class="tabContainer">
+                <div class="updateContainer">
+                    <div class="adminPanelName">
+                        <div id="mealStatus" class="msgStatus">&nbsp;</div>
+                    </div>
+                    <div class="searchBoxRow">
+                        <div class="outline">
+                            <input type="text" class="listInput" type="search" id="editMealSearch"
+                                placeholder="Search Meals" autocomplete="off">
+                            <div class="backspace">
+                                backspace
+                            </div>
+                        </div>
+                        <div id="mealListOutline" class="outline">
+                            <div id="adminMealListDropDown" class="adminBtn">filter_list</div>
+                        </div>
+                    </div>
+                    <div id="editMealList" class="adminListItems"></div>
+                    <div class="updateRow">
+                        Options:
+                        <div class="outline">
+                            <div id="editAdminMeal" class="adminBtn">save</div>
+                            <div id="newAdminMeal" class="adminBtn">playlist_add</div>
+                            <div id="delAdminMeal" class="adminBtn">delete</div>
+                        </div>
+                    </div>
+                    <div class="updateRow">
+                        Meal Name:
+                        <div class="outline">
+                            <input type="text" class="listInput" id="newMealName" placeholder="Meal Name"
+                                autocomplete="off">
+                            <div class="adminBackSpace">backspace</div>
+                        </div>
+                    </div>
+                    <div class="updateRow">
+                        Meat Type:
+                        <select id="newMeatType"></select>
+                    </div>
+                    <div class="updateRow">
+                        Meal Type:
+                        <select id="newMealType"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabContainer">
+                <div class="updateContainer">
+                    <div class="adminPanelName">
+                        <div id="mealTypeStatus" class="msgStatus">&nbsp;</div>
+                    </div>
+                    <div class="searchBoxRow">
+                        <div class="outline">
+                            <input type="text" class="listInput" type="search" id="editMealTypes"
+                                placeholder="Search Meal Types" autocomplete="off">
+                            <div class="backspace">
+                                backspace
+                            </div>
+                        </div>
+                        <div class="outline">
+                            <div id="adminMealTypeListDropDown" class="adminBtn">filter_list</div>
+                        </div>
+                    </div>
+                    <div id="editMealTypeList" class="adminListItems"></div>
+                    <div class="updateRow">
+                        Options:
+                        <div class="outline">
+                            <div id="editAdminMealType" class="adminBtn">save</div>
+                            <div id="newAdminMealType" class="adminBtn">playlist_add</div>
+                            <div id="delAdminMealType" class="adminBtn">delete</div>
+                        </div>
+                    </div>
+                    <div class="updateRow">
+                        Meal Type Name:
+                        <div class="outline">
+                            <input type="text" class="listInput" id="newMealTypeName" placeholder="Meal Type Name"
+                                autocomplete="off">
+                            <div class="adminBackSpace">backspace</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tabContainer">
+                <div class="updateContainer">
+                    <div class="adminPanelName">
+                        <div id="meatTypeStatus" class="msgStatus">&nbsp;</div>
+                    </div>
+                    <div class="searchBoxRow">
+                        <div class="outline">
+                            <input type="text" class="listInput" type="search" id="editMeatTypes"
+                                placeholder="Search Meat Types" autocomplete="off">
+                            <div class="backspace">
+                                backspace
+                            </div>
+                        </div>
+                        <div class="outline">
+                            <div id="adminMeatTypeListDropDown" class="adminBtn">filter_list</div>
+                        </div>
+                    </div>
+                    <div id="editMeatTypeList" class="adminListItems"></div>
+                    <div class="updateRow">
+                        Options:
+                        <div class="outline">
+                            <div id="editAdminMeatType" class="adminBtn">save</div>
+                            <div id="newAdminMeatType" class="adminBtn">playlist_add</div>
+                            <div id="delAdminMeatType" class="adminBtn">delete</div>
+                        </div>
+                    </div>
+                    <div class="updateRow">
+                        Meat Type Name:
+                        <div class="outline">
+                            <input type="text" class="listInput" id="newMeatTypeName" placeholder="Meat Type Name"
+                                autocomplete="off">
+                            <div class="adminBackSpace">backspace</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tabContainer">
+                <div class="adminPanelName">
+                    <div id="optionsStatus" class="msgStatus">&nbsp;</div>
+                </div>
+                <button id="install">Install</button><br/>
+                <button id="shiftWeeks">Shift Weeks</button>
+            </div>
+            <div class="tabContainer activeTabContainer">
+                <p>Meal Planner is a mobile app for managing meal schedules.</p>
+                <p>Developed by Jamison & Steven Winters.</p>
+                <p><img src="images/ww_logo.png" alt="winterswebs logo"></p>
+            </div>
+        </section>
+    </div>
+    </div>
+
+    <div id="mainPanel">
+        <div id="mainPanel_top">
+            <div id="mainPanelTitle">
+                <div>Meal Planner</div>
+                <div id="open_settingsPanel" class="settings material-icons">settings</div>
+            </div>
+
+            <div id="topoptions">
+                <div id="shortlinks">
+                    <a class="material-icons shortlink" href="#previousWeek">first_page</a>
+                    <a class="material-icons shortlink" href="#currentWeek">check_box_outline_blank</a>
+                    <a class="material-icons shortlink" href="#nextWeek">last_page</a>
+                    <a class="material-icons shortlink" href="#" id="mealFilter">filter_alt</a>
+                </div>
+                <section class="listContainer">
+                    <div class="outline">
+                        <input type="text" class="listInput" type="search" id="mealOptions" placeholder="Search"
+                            autocomplete="off">
+                        <div class="backspace">
+                            backspace
+                        </div>
+                    </div>
+                </section>
+                <div id="mainListDropDown" class="dropdown">filter_list</div>
+            </div>
+        </div>
+
+
+        <div id="weekContainer"><!-- keep this "weekContainer" div, important for display functionality -->
+            <div id="previousWeek" class="weekView">
+                <div class="weekRangeSelector">
+                    <div class="weekSelector">Previous Week</div>
+                </div>
+                <div class="mainContainer">
+                    <div id="weekDaySelector">
+                        <div data-day="Sunday" data-week="previous" class="week">Sun</div>
+                        <div data-day="Monday" data-week="previous" class="week">Mon</div>
+                        <div data-day="Tuesday" data-week="previous" class="week">Tue</div>
+                        <div data-day="Wednesday" data-week="previous" class="week">Wed</div>
+                        <div data-day="Thursday" data-week="previous" class="week">Thu</div>
+                        <div data-day="Friday" data-week="previous" class="week">Fri</div>
+                        <div data-day="Saturday" data-week="previous" class="week">Sat</div>
+                    </div>
+                    <div class="mealList">
+                        <div data-id="Sunday" data-day="Sunday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Monday" data-day="Monday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Tuesday" data-day="Tuesday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Wednesday" data-day="Wednesday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Thursday" data-day="Thursday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Friday" data-day="Friday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Saturday" data-day="Saturday" data-week="previous" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="currentWeek" class="weekView">
+                <div class="weekRangeSelector">
+                    <div class="weekSelector">Current Week</div>
+                </div>
+                <div class="mainContainer">
+                    <div id="weekDaySelector">
+                        <div id="Sunday" data-day="Sunday" data-week="current" class="week">Sun</div>
+                        <div id="Monday" data-day="Monday" data-week="current" class="week">Mon</div>
+                        <div id="Tuesday" data-day="Tuesday" data-week="current" class="week">Tue</div>
+                        <div id="Wednesday" data-day="Wednesday" data-week="current" class="week">Wed</div>
+                        <div id="Thursday" data-day="Thursday" data-week="current" class="week">Thu</div>
+                        <div id="Friday" data-day="Friday" data-week="current" class="week">Fri</div>
+                        <div id="Saturday" data-day="Saturday" data-week="current" class="week">Sat</div>
+                    </div>
+                    <div class="mealList">
+                        <div data-id="Sunday" data-day="Sunday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Monday" data-day="Monday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Tuesday" data-day="Tuesday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Wednesday" data-day="Wednesday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Thursday" data-day="Thursday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Friday" data-day="Friday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Saturday" data-day="Saturday" data-week="current" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nextWeek" class="weekView">
+                <div class="weekRangeSelector">
+                    <div class="weekSelector">Next Week</div>
+                </div>
+                <div class="mainContainer">
+                    <div id="weekDaySelector">
+                        <div data-day="Sunday" data-week="next" class="week">Sun</div>
+                        <div data-day="Monday" data-week="next" class="week">Mon</div>
+                        <div data-day="Tuesday" data-week="next" class="week">Tue</div>
+                        <div data-day="Wednesday" data-week="next" class="week">Wed</div>
+                        <div data-day="Thursday" data-week="next" class="week">Thu</div>
+                        <div data-day="Friday" data-week="next" class="week">Fri</div>
+                        <div data-day="Saturday" data-week="next" class="week">Sat</div>
+                    </div>
+                    <div class="mealList">
+                        <div data-id="Sunday" data-day="Sunday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Monday" data-day="Monday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Tuesday" data-day="Tuesday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Wednesday" data-day="Wednesday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Thursday" data-day="Thursday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Friday" data-day="Friday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                        <div data-id="Saturday" data-day="Saturday" data-week="next" data-type="meal"
+                            class="meal draggable">
+                            <div class="mealData">&nbsp;</div>
+                            <div class="mealBackSpace">backspace</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

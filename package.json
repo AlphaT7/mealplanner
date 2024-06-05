@@ -1,0 +1,22 @@
+{
+  "name": "mealplanner",
+  "version": "1.0.0",
+  "description": "A weekly dinner scheduling app.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx vite build && workbox generateSW workbox-config.js && firebase deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlphaT7/mealplanner.git"
+  },
+  "author": "Jamison Winters",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.17.1",
+    "idb-keyval": "^6.2.0",
+    "vite": "^5.2.8",
+    "workbox-cli": "^7.1.0",
+    "workbox-sw": "^7.1.0"
+  }
+}

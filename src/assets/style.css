@@ -1,0 +1,884 @@
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Inconsolata');
+    @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+    html,
+    body {
+        --themeBackground: #eb603f;
+        --themeTitle: #cb4427;
+        --themeFontColor: #fff;
+        --tableCell: #eba595;
+        --currentDateTableCell: #eb603f;
+        --panelTitleText: #fcfcfc;
+        --subTitle: linear-gradient(180deg, rgba(62, 62, 62, 1) 0%, rgba(125, 125, 125, 1) 100%);
+        --selectedHighlight: dodgerblue;
+        --icons: #3E3E3E;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        font-family: "Inconsolata";
+        overflow: hidden;
+    }
+
+    /*
+#4C4C4C - A nice medium dark gray. Easy on the eyes. 
+#2F2F2F - Very dark charcoal gray. Still soft enough for backgrounds. 
+#252525 - Jet black but not too harsh. Good alternative to pure black. 
+#3E3E3E - Dark gray with a subtle blue undertone. Sophisticated color. 
+#636363 - A very soft, muted dark gray. Works well for text. 
+#545454 - Dark charcoal gray. Slightly lighter than #3E3E3E. 
+#666666 - Dark but not too heavy. Easy to read against for text. 
+#757575 - Warm gray with a brown tint. Feels earthy and natural. 
+#404040 - A deeper charcoal, but still in the soft range. 
+#EBEBEB - Very light gray,nearing white. For subtle backgrounds.
+*/
+
+    * div {
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    /* Panels */
+    .material-icons {
+        font-family: "Material Icons";
+    }
+
+    .updateContainer {
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .updateContainer .searchBoxRow {
+        display: flex;
+    }
+
+    .updateContainer .searchBoxRow .outline {
+        flex: 1;
+        display: flex;
+    }
+
+    .updateContainer .searchBoxRow :nth-child(2) {
+        flex: 0;
+        margin-left: 0.5em;
+    }
+
+    .updateContainer .updateRow {
+        flex: 1;
+        margin: 1em 0 0 0;
+        display: flex;
+        max-width: 500px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .updateContainer .updateRow .outline {
+        flex: 1;
+        justify-content: space-evenly;
+        max-width: 60%;
+    }
+
+    .updateContainer .updateRow select {
+        flex: 1;
+        max-width: 60%;
+        padding: 5px;
+        margin-left: 10px;
+        border: 1px solid silver;
+        border-radius: 4px;
+    }
+
+    .editMealList {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .adminPanelName {
+        display: none;
+        background-color: transparent;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: -2px;
+        z-index: 5;
+    }
+
+    .msgStatus {
+        color: transparent;
+        flex: 1;
+        padding: 12px;
+        transition: all ease 0.45s;
+        word-break: keep-all;
+        overflow: hidden;
+        white-space: nowrap;
+        box-shadow: 0px 0px 0px transparent;
+        border: 2px solid transparent;
+        font-weight: bold;
+    }
+
+    .msgFlash {
+        box-shadow: 0px 0px 5px silver;
+        border: 1px solid silver;
+        background: #FFCA28;
+        color: #000;
+        border-radius: 4px;
+    }
+
+    #settingsPanel {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #fff;
+        z-index: 0;
+        opacity: 0;
+        flex-flow: column;
+        background: var(--themeTitle);
+    }
+
+    .showPanel {
+        display: block !important;
+        opacity: 1 !important;
+        z-index: 3 !important;
+    }
+
+    .showSettings {
+        display: flex !important;
+        opacity: 1 !important;
+        z-index: 4 !important;
+    }
+
+    .showFilters {
+        opacity: 1 !important;
+        height: calc(100% - 125px) !important;
+    }
+
+    #settingsPanelTitle {
+        display: flex;
+        padding: .5em;
+        align-items: center;
+        color: var(--themeFontColor);
+        font-size: 2em;
+        position: sticky;
+        top: 0;
+    }
+
+    #day {
+        display: flex;
+        align-items: center;
+        color: var(--themeFontColor)
+    }
+
+    #close_settingsPanel {
+        display: flex;
+        border-radius: 10px;
+        align-items: center;
+        margin-left: auto;
+        padding: .4em;
+        color: #000;
+        background: var(--themeFontColor);
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+    }
+
+    .mealData {
+        margin-right: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex: 1;
+    }
+
+    #chooseDayContainer {
+        display: flex;
+        width: 100%;
+        padding: 1em;
+        justify-content: space-evenly;
+    }
+
+    .weekSelector {
+        font-size: x-large;
+        padding: .25em;
+        text-align: center;
+        color: var(--panelTitleText);
+        width: 250px;
+    }
+
+    .mealList {
+        flex: 1;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .week,
+    .meal {
+        padding: .20em;
+        border-top: 3px solid #efefef;
+        border-bottom: 3px solid #efefef;
+        border-right: 3px solid #fff;
+        border-left: 3px solid #fff;
+        margin: .10em;
+        white-space: nowrap;
+        text-align: left;
+        font-size: 17pt;
+        font-family: "PT Sans Narrow";
+        display: flex;
+        justify-content: start;
+    }
+
+    .mainContainer {
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    #filterOptionsPanel {
+        flex-direction: column;
+        min-height: 0;
+        height: 0;
+        position: fixed;
+        background: rgba(203, 68, 39, .65);
+        display: flex;
+        font-weight: bold;
+        overflow-y: scroll;
+        top: 125px;
+        bottom: 0;
+        opacity: 0;
+        left: 0;
+        right: 0;
+        padding: 5px;
+        backdrop-filter: blur(4px);
+        transition: all ease-out 0.75s;
+        z-index: 1;
+    }
+
+    .optTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #F7F7FF;
+        padding: 5px;
+        margin: 8px 4px;
+        border-radius: 4px;
+        font-size: 2em;
+    }
+
+    #filterOptionsPanel>div:nth-child(1) {
+        display: flex;
+    }
+
+    .space {
+        flex-grow: 1;
+    }
+
+    #close_filterOptionsPanel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid silver;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 4px;
+        text-shadow: 2px 2px 5px silver;
+        background: #F7F7FF;
+        box-shadow: inset 1px 1px 1px silver, inset -1px -1px 1px #fff;
+    }
+
+    .filterOptionsButtons {
+        align-items: center;
+        border: 1px solid silver;
+        border-radius: 4px;
+        text-shadow: 2px 2px 5px silver;
+        background: #F7F7FF;
+        box-shadow: inset 1px 1px 1px silver, inset -1px -1px 1px #fff;
+        padding: 5px 10px 5px 10px;
+    }
+
+    #close_mealFilters {
+        color: #fff;
+        padding: 5px;
+    }
+
+    #filterOptionsList {
+        display: flex;
+    }
+
+    #meatTypeOptions,
+    #mealTypeOptions {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .draggable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: grab;
+        color: #000;
+        align-items: center;
+        position: relative;
+    }
+
+    .dragActive {
+        color: var(--subTitle);
+        border-top: 3px solid #3E3E3E;
+        ;
+        border-bottom: 3px solid #3E3E3E;
+        ;
+    }
+
+    #weekDaySelector {
+        text-align: left;
+    }
+
+    .weekRangeSelector {
+        scroll-margin-top: 50px;
+        border-top: 1px solid #000;
+        border-left: none;
+        border-bottom: 1px solid #000;
+        border-right: none;
+        display: flex;
+        padding: .10em;
+        justify-content: center;
+        background: var(--subTitle);
+        height: 50px;
+    }
+
+    #currentWeek .weekRangeSelector {
+        background: linear-gradient(180deg, rgba(30, 144, 255, 1) 0%, rgba(138, 197, 255, 1) 100%)
+    }
+
+    #showAllMeals,
+    #resetFilters,
+    #customFilter {
+        color: var(--icons);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid silver;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 4px;
+        text-shadow: 2px 2px 5px silver;
+        background: #F7F7FF;
+        box-shadow: inset 1px 1px 1px silver, inset -1px -1px 1px #fff;
+        transition: all 1s ease-out;
+    }
+
+    .highlightBtn {
+        background: dodgerblue !important;
+        color: #000 !important;
+        text-shadow: none !important;
+        border: 1px solid dodgerblue !important;
+        box-shadow: none !important;
+    }
+
+    #mainPanel {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 0 auto;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        scroll-behavior: smooth;
+        scroll-snap-type: y proximity;
+    }
+
+    #mainPanelTitle {
+        background: var(--themeTitle);
+        display: flex;
+        width: 100%;
+        height: 75px;
+        font-size: 3em;
+        padding: .25em;
+        align-items: center;
+        font-family: "Cookie";
+        color: #fff;
+        justify-content: space-between;
+    }
+
+    #mainPanel_top {
+        scroll-snap-align: start;
+        display: flex;
+        flex-flow: column;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .weekView {
+        scroll-margin-top: 125px;
+        scroll-snap-align: start;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        overflow: hidden;
+        margin-bottom: 50px;
+        border-right: 1px solid #000;
+        border-left: 1px solid #000;
+        border-bottom: 1px solid #000;
+        border-top: none;
+    }
+
+    #weekContainer {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .filterButton {
+        width: 150px;
+        font: .5em;
+        padding: .5em;
+        border-radius: 5px;
+        border: 1px solid #000;
+    }
+
+    #previousWeek {
+        background: none;
+    }
+
+    #currentWeek {
+        background: none;
+    }
+
+    #nextWeek {
+        background: none;
+    }
+
+    .today {
+        border-top: 3px solid var(--currentDateTableCell);
+        border-bottom: 3px solid var(--currentDateTableCell);
+    }
+
+    .timeSelected {
+        border-top: 3px solid var(--selectedHighlight) !important;
+        border-bottom: 3px solid var(--selectedHighlight) !important;
+        border-left: 3px solid #fff !important;
+        border-right: 3px solid #fff !important;
+
+    }
+
+    .title {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom right;
+        padding: 1em;
+        height: 75px;
+        flex: 1 1 auto;
+        font-weight: bold;
+        font-size: 3em;
+    }
+
+    .settings {
+        margin: 0 10px 0 20px;
+        color: var(--themeTitle);
+    }
+
+    .edit,
+    .settings {
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+        padding: .05em;
+        font-size: 1em;
+        border-radius: 10px;
+        background: var(--themeFontColor);
+        cursor: pointer;
+    }
+
+    .shortlink:not(#mealFilter) {
+        display: none;
+    }
+
+    #shortlinks {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 1;
+        border: 1px solid silver;
+        margin: 5px;
+        border-radius: 4px;
+        text-shadow: 2px 2px 5px silver;
+        background: #F7F7FF;
+        box-shadow: inset 1px 1px 1px silver, inset -1px -1px 1px #fff;
+    }
+
+    .shortlink {
+        text-decoration: none;
+        color: var(--icons);
+        padding: 4px;
+        font-size: xx-large;
+    }
+
+    .shortlink:nth-child(2) {
+        font-size: x-large;
+    }
+
+    .shortlink:visited {
+        color: var(--icons);
+    }
+
+    #topoptions {
+        width: 100%;
+        text-align: center;
+        z-index: 3;
+        background: #fff;
+        height: 50px;
+        display: flex;
+    }
+
+    .toplink {
+        display: none;
+    }
+
+    /************/
+
+    #navContainer {
+        display: flex;
+        position: sticky;
+        text-align: center;
+        color: #BDC3C7;
+        background: #ECF0F1;
+        font-weight: 200;
+        text-transform: uppercase;
+        top: 0;
+        width: 100%;
+        min-height: 50px;
+        flex-wrap: wrap;
+        align-content: stretch;
+        font-family: "Inconsolata";
+        cursor: pointer;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab {
+        position: relative;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #DFDFDF;
+        border-bottom: none;
+    }
+
+    .tab::after {
+        content: " ";
+        position: absolute;
+        height: 0;
+        bottom: 0;
+        width: 100%;
+        transition: all 0.35s;
+        background: #c0392b;
+    }
+
+    .menuBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        margin-bottom: 2px;
+        background: #c0392b;
+        color: #fff;
+        z-index: 2;
+    }
+
+    .menuBtn:hover {
+        background: darksalmon;
+    }
+
+    #navDrop {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        transition: all 0.35s;
+        top: 52px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    #navDrop>div {
+        transition: all 0.35s;
+        transform: translate(0, -100%);
+    }
+
+    .drop {
+        transform: translate(0, 0) !important;
+    }
+
+    .activeTab {
+        border: 1px solid #DFDFDF;
+        border-bottom: none;
+        margin-bottom: -1px;
+        background: #fff;
+        color: #c0392b;
+    }
+
+    .activeTab::after {
+        height: 5px !important;
+    }
+
+    #tabGroup {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        display: flex;
+        flex-grow: 1;
+        text-align: center;
+        z-index: -1;
+    }
+
+    .tabContainer {
+        width: 100%;
+        border: 1px solid #DFDFDF;
+        padding: 10px;
+        display: none;
+        background: #fff;
+        position: relative;
+    }
+
+    .tabContainer table {
+        margin: 0 auto;
+    }
+
+    .activeTabContainer {
+        display: block !important;
+    }
+
+    /* -- Search Boxes Styling -- */
+
+    .listContainer {
+        margin: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .listItems {
+        min-height: 0px;
+        overflow-y: auto;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+        top: 125px;
+        left: 0;
+        right: 0;
+        height: 0;
+        opacity: 0;
+        transition: all ease-out 0.75s;
+        box-shadow: inset 0px 0px 5px #000;
+        padding: 10px;
+    }
+
+    .adminListItems {
+        max-width: 500px;
+        width: 100%;
+        min-height: 0px;
+        overflow-y: auto;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        z-index: -1;
+        top: 110px;
+        margin: 0 auto;
+        height: 0;
+        opacity: 0;
+        transition: all ease-out 0.75s;
+        box-shadow: inset 0px 0px 5px #000;
+        padding: 10px;
+    }
+
+    .showList {
+        height: calc(100% - 125px);
+        opacity: 1;
+        bottom: 0;
+        background: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(4px);
+    }
+
+    .showAdminList {
+        height: calc(100% - 105px);
+        opacity: 1;
+        bottom: 0;
+        background: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(4px);
+        z-index: 1;
+    }
+
+    .outline,
+    .dropdown {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        border: 1px solid silver;
+        border-radius: 4px;
+        padding: 4px 2px 4px 3px;
+        box-shadow: 0px 0px 5px silver;
+    }
+
+    .backspace,
+    .mealBackSpace,
+    .dropdown,
+    .adminBtn {
+        -webkit-tap-highlight-color: transparent;
+        font-family: "Material Icons";
+        font-size: 30px;
+        cursor: pointer;
+        color: var(--icons);
+        user-select: none;
+        text-shadow: 2px 2px 5px silver;
+    }
+
+    .backspace {
+        margin-right: 4px;
+    }
+
+    #install, #shiftWeeks {
+        border-radius: 20px;
+        border: 1px solid #222;
+        background: #fff;
+        width: 150px;
+        height: 50px;
+        font-family: 24pt "PT Sans Narrow";
+        margin: 10px;
+    }
+
+    .mealBackSpace {
+        font-size: 20px !important;
+        display: none;
+        flex-shrink: 1;
+    }
+
+    .showMealBackSpace {
+        display: block
+    }
+
+    .adminBackSpace {
+        font-family: "Material Icons";
+        font-size: 20px !important;
+        flex-shrink: 1;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        border: 1px solid silver;
+        margin: 5px 4px 5px 2px;
+    }
+
+    .listInput {
+        font-size: 0.8em;
+        flex: 1;
+        width: 100%;
+        background: none;
+        flex-grow: 1;
+        border: none;
+        outline: none;
+    }
+
+    .itemOption {
+        background: #F5FFFA;
+        border: 1px solid teal;
+        padding: 15px;
+        cursor: pointer;
+        text-align: left;
+        padding-left: 50px;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #000;
+        display: flex;
+        align-items: center;
+        margin: 0 4px;
+        position: relative;
+    }
+
+    .itemOption input {
+        transform: scale(1.5);
+        margin-right: 40px;
+    }
+
+
+
+    /* -- End Search Boxes Styling -- */
+
+    @media screen and (orientation: landscape) and (min-width: 1001px) {
+        #weekContainer {
+            flex-flow: row;
+        }
+
+        .weekView {
+            flex: 1 1 0px;
+        }
+    }
+
+    @media screen and (orientation: portrait) {
+        .weekView {
+            flex-grow: 1;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .tab {
+            padding: 0;
+        }
+
+        #mainPanelTitle {
+            font-size: 2em;
+        }
+
+        .title {
+            padding: .6em;
+            font-size: 2em;
+        }
+
+        .week,
+        .meal {
+            padding: .20em;
+            font-size: 15pt;
+        }
+
+        .draggable {
+            background-size: 7px;
+            padding-left: 5px !important;
+        }
+
+        .weekView {
+            width: 100% !important;
+        }
+
+        .shortlink {
+            display: block !important;
+            padding: 2px !important;
+        }
+
+        .toplink {
+            text-align: center;
+            padding: 10px;
+            display: block !important;
+        }
+
+        .itemOption {
+            font-size: 1em;
+            padding-left: 15px;
+        }
+
+        #filterOptionsList {
+            flex-direction: column;
+        }
+
+    }
