@@ -1,6 +1,36 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false
+    "meals": {
+      "info": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      },
+      "mealCategories": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      },
+      "meatCategories": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      }
+    },
+    "weeks": {
+      "previous": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      },
+      "current": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      },
+      "next": {
+        ".read": "auth.uid !== null",
+        ".write": "auth.uid !== null"
+      }
+    },
+    "suggestions": {
+      ".read": "auth.uid !== null",
+      ".write": "auth.uid !== null"
+    }
   }
 }
